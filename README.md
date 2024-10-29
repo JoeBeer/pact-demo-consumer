@@ -1,3 +1,1 @@
 # pact-demo-consumer
-
-Test
