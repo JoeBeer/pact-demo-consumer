@@ -20,11 +20,17 @@
     <developers>
         <developer/>
     </developers>
+    <distributionManagement>
+        <repository>
+            <id>github-repo</id>
+            <url>https://maven.pkg.github.com/JoeBeer/pact-demo-consumer</url>
+        </repository>
+    </distributionManagement>
+
     <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
+        <connection>scm:git:https://github.com/JoeBeer/pact-demo-consumer.git</connection>
+        <developerConnection>scm:git:https://github.com/JoeBeer/pact-demo-consumer.git</developerConnection>
+        <url>https://github.com/JoeBeer/pact-demo-consumer</url>
     </scm>
     <properties>
         <java.version>21</java.version>
@@ -54,7 +60,7 @@
         <dependency>
             <groupId>au.com.dius.pact.consumer</groupId>
             <artifactId>junit5</artifactId>
-            <version>4.5.10</version>
+            <version>4.6.14</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -71,6 +77,29 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>au.com.dius.pact.provider</groupId>
+                <artifactId>maven</artifactId>
+                <version>4.1.11</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>publish</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
+                    <pactDirectory>${project.basedir}/target/pacts</pactDirectory>
+                    <projectVersion>${project.version}</projectVersion>
+                    <serviceProviders>
+                        <serviceProvider>
+                            <name>userProvider</name>
+                            <port>8080</port>
+                        </serviceProvider>
+                    </serviceProviders>
                 </configuration>
             </plugin>
         </plugins>
