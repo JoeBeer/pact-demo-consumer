@@ -10,7 +10,7 @@
     </parent>
     <groupId>ch.baloise</groupId>
     <artifactId>pact-demo-consumer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>pact-demo-consumer</name>
     <description>pact-demo-consumer</description>
     <url/>
