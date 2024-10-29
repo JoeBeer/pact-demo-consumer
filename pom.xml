@@ -20,21 +20,24 @@
     <developers>
         <developer/>
     </developers>
-    <distributionManagement>
-        <repository>
-            <id>github-repo</id>
-            <url>https://maven.pkg.github.com/JoeBeer/pact-demo-consumer</url>
-        </repository>
-    </distributionManagement>
-
-    <scm>
-        <connection>scm:git:https://github.com/JoeBeer/pact-demo-consumer.git</connection>
-        <developerConnection>scm:git:https://github.com/JoeBeer/pact-demo-consumer.git</developerConnection>
-        <url>https://github.com/JoeBeer/pact-demo-consumer</url>
-    </scm>
     <properties>
         <java.version>21</java.version>
+        <git-url>scm:git:https://bitbucket.balgroupit.com/scm/~b049309/test.git</git-url>
     </properties>
+    <scm>
+        <url>https://bitbucket.balgroupit.com/users/b049309/repos/test/browse</url>
+        <connection>${git-url}</connection>
+        <developerConnection>${git-url}</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>baloise-snapshots</id>
+            <url>https://nexus.balgroupit.com/repository/baloise-ch-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,6 +88,8 @@
                 <version>4.1.11</version>
                 <executions>
                     <execution>
+                        <id>publish-pacts</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>publish</goal>
                         </goals>
@@ -94,12 +99,6 @@
                     <pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
                     <pactDirectory>${project.basedir}/target/pacts</pactDirectory>
                     <projectVersion>${project.version}</projectVersion>
-                    <serviceProviders>
-                        <serviceProvider>
-                            <name>userProvider</name>
-                            <port>8080</port>
-                        </serviceProvider>
-                    </serviceProviders>
                 </configuration>
             </plugin>
         </plugins>
