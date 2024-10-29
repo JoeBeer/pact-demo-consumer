@@ -89,7 +89,7 @@ public class UserClientControllerPactTest {
               .nullValue("id")
               .stringType("name", USER_1.getName()))
           .willRespondWith()
-          .status(201)
+          .status(200)
           .body(new PactDslJsonBody()
               .stringType("id", USER_1.getId())
               .stringType("name", USER_1.getName()))
