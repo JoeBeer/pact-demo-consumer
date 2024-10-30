@@ -82,26 +82,34 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>au.com.dius.pact.provider</groupId>
-                <artifactId>maven</artifactId>
-                <version>4.1.11</version>
-                <executions>
-                    <execution>
-                        <id>publish-pacts</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>publish</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
-                    <pactDirectory>${project.basedir}/target/pacts</pactDirectory>
-                    <projectVersion>${project.version}</projectVersion>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>au.com.dius.pact.provider</groupId>
+                        <artifactId>maven</artifactId>
+                        <version>4.1.11</version>
+                        <executions>
+                            <execution>
+                                <id>publish-pacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>publish</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
+                            <pactDirectory>${project.basedir}/target/pacts</pactDirectory>
+                            <projectVersion>${project.version}</projectVersion>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
