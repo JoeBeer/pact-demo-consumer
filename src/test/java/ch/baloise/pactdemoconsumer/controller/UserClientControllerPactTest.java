@@ -80,7 +80,7 @@ public class UserClientControllerPactTest {
     @Pact(consumer = "pact-demo-consumer")
     public RequestResponsePact createCreateUserPact(PactDslWithProvider builder) {
       return builder
-          .given("No User exists")
+          .given("User does not exist")
           .uponReceiving("A request to create a user")
           .path(USER_PATH)
           .method("POST")
@@ -110,7 +110,7 @@ public class UserClientControllerPactTest {
     @Pact(consumer = "pact-demo-consumer")
     public RequestResponsePact createUpdateUserPact(PactDslWithProvider builder) {
       return builder
-          .given("User exists and can be updated", Map.of("userId", USER_1.getId()))
+          .given("User exists", Map.of("userId", USER_1.getId()))
           .uponReceiving("A request to update user details")
           .path(USER_PATH + "/" + USER_1.getId())
           .method("PUT")
@@ -139,7 +139,7 @@ public class UserClientControllerPactTest {
     @Pact(consumer = "pact-demo-consumer")
     public RequestResponsePact createDeleteUserPact(PactDslWithProvider builder) {
       return builder
-          .given("User exists and can be deleted", Map.of("userId", USER_1.getId()))
+          .given("User exists", Map.of("userId", USER_1.getId()))
           .uponReceiving("A request to delete a user")
           .path(USER_PATH + "/" + USER_1.getId())
           .method("DELETE")
